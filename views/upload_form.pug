@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    h1 Upload
+
+        .col-md-6.m-auto
+              form(action='/upload' method='POST' enctype='multipart/form-data')
+              .custom-file.mb-3
+              input#file.custom-file-input(type='file' name='file')
+              label.custom-file-label(for='file') Choose File
+              input.btn.btn-primary.btn-block(type='submit' value='Submit')
