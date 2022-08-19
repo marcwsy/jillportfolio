@@ -1,6 +1,6 @@
-var About = require('../models/about');
-var async = require('async');
-var { body, validationResult } = require('express-validator');
+const About = require('../models/about');
+const async = require('async');
+const { body, validationResult } = require('express-validator');
 
 // Display detail page
 exports.index = function(req, res) {

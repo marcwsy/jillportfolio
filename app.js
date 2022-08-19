@@ -4,8 +4,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const expressValidator = require('express-validator');
 const flash = require('connect-flash');
+const expressValidator = require('express-validator');
 const session = require('express-session');
 const passport = require('passport');
 const config = require('./config/database');
@@ -30,21 +30,26 @@ conn.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.use(bodyParser.json());
-app.use(methodOverride('_method'));
 app.set('view engine', 'pug');
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+
+app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(methodOverride('_method'));
+app.use(logger('dev'));
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Init gfs
-let gfs;
+let gfs, gridfsBucket;
 
 conn.on('open', () => {
-  // Init stream
+  gridfsBucket = new mongoose.mongo.GridFSBucket(conn.db, {
+    bucketName: 'uploads'
+  });
   gfs = Grid(conn.db, mongoose.mongo);
   gfs.collection('uploads');
 });
@@ -72,7 +77,7 @@ const storage = new GridFsStorage({
 // Set multer storage engine to the newly created object
 const upload = multer({ storage });
 
-app.get('/', (req, res) => {
+app.get('/upload', (req, res) => {
   gfs.files.find().toArray((err, files) => {
     // Check if files
     if (!files || files.length === 0) {
@@ -93,9 +98,32 @@ app.get('/', (req, res) => {
   });
 });
 
+// app.get('/upload', ({ params: { id } }, res) => {
+
+//   const _id = new mongoose.Types.ObjectId(id);
+  
+//   gridfsBucket.find({ _id }).toArray((err, files) => {
+//     if (!files || files.length === 0) {
+//       res.render('upload_form', { files: false });
+//     } else {
+//       files.map(file => {
+//         if (
+//           file.contentType === 'image/jpeg' ||
+//           file.contentType === 'image/png'
+//         ) {
+//           file.isImage = true;
+//         } else {
+//           file.isImage = false;
+//         }
+//       });
+//       res.render('upload_form', { files: files });
+//     }
+//   });
+// });
+
 app.post('/upload', upload.single('file'), (req, res) => {
   // res.json({ file: req.file });
-    // res.redirect('/');
+    res.redirect('/upload');
 });
 
 app.get('/files', (req, res) => {
@@ -109,6 +137,34 @@ app.get('/files', (req, res) => {
 
     // Files exist
     return res.json(files);
+  });
+});
+
+app.get('/files/:id', ({ params: { id } }, res) => {
+
+  const _id = new mongoose.Types.ObjectId(id);
+  
+  gridfsBucket.find({ _id }).toArray((err, files) => {
+    if (!files || files.length === 0)
+      return res.status(400).send('no files exist');
+    // File exists
+    return res.json(files);
+  });
+});
+
+app.get('/image/:id', ({ params: { id } }, res) => {
+  if (!id || id === 'undefined') return res.status(400).send('no image id');
+
+    const _id = new mongoose.Types.ObjectId(id);
+
+  gridfsBucket.find({ _id }).toArray((err, files) => {
+    if (!files || files.length === 0) {
+      return res.status(404).json({
+        err: 'No files exist'
+      });
+    }
+
+    gridfsBucket.openDownloadStream(_id).pipe(res);
   });
 });
 
@@ -131,23 +187,23 @@ app.use(function (req, res, next) {
     next();
 });
 
-// Express validator middleware
-app.use(expressValidator({
-  errorFormatter: function (param, msg, value) {
-    const namespace = param.split('.')
-      , root = namespace.shift()
-      , formParam = root;
+// // Express validator middleware
+// app.use(expressValidator({
+//   errorFormatter: function (param, msg, value) {
+//     const namespace = param.split('.')
+//       , root = namespace.shift()
+//       , formParam = root;
 
-    while (namespace.length) {
-      formParam += '[' + namespace.shift() + ']';
-    }
-    return {
-      param: formParam,
-      msg: msg,
-      value: value
-    };
-  }
-}));
+//     while (namespace.length) {
+//       formParam += '[' + namespace.shift() + ']';
+//     }
+//     return {
+//       param: formParam,
+//       msg: msg,
+//       value: value
+//     };
+//   }
+// }));
 
 require('./config/passport')(passport);
 app.use(passport.initialize());
