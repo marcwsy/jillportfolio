@@ -3,14 +3,10 @@ extends layout
 block content
     h1 Upload
 
-        h1.text-center.display-4.my-4 Mongo File Uploads
-        form(action='/file/upload' method='POST' enctype='multipart/form-data')
+        h1.text-center.display-4.my-4 3D Modeling
+        form(action='/modeling' method='POST' enctype='multipart/form-data')
             .custom-file.mb-3
                 input#file.custom-file-input(type='file' name='file')
                 label.custom-file-label(for='file') Choose File
             input.btn.btn-primary.btn-block(type='submit' value='Submit')
         hr
-        each val in files  
-                ul
-                    li
-                        img(src=`/file/image/${val._id}`)

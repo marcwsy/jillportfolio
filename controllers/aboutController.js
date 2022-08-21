@@ -1,9 +1,13 @@
-const About = require('../models/about');
 const async = require('async');
 const { body, validationResult } = require('express-validator');
+const { infoDb } = require('../config/db');
+require("../models/about");
+const About = require('mongoose').model('About');
+
+infoDb();
 
 // Display detail page
-exports.index = function(req, res) {
+exports.index = function(req, res, next) {
     About.findOne({}, 'first_name last_name skills about_me phone_number email')
     .exec(function (err, results) {
         if (err) { return next(err); }

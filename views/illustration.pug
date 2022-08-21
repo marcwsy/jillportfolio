@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    h1 Illustration
+    if user
+        a(href='./illustration/upload') Upload
+        each val in files  
+            ul
+                li
+                    img(src=`/illustration/image/${val._id}`)
+    else
+        each val in files  
+            ul
+                li
+                    img(src=`/illustration/image/${val._id}`)

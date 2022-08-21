@@ -20,11 +20,11 @@ html
               li.nav-item
                 a.nav-link(aria-current='page' href='/home') Home
               li.nav-item
-                a.nav-link(href='#') 3D Modeling
+                a.nav-link(href='/modeling') 3D Modeling
               li.nav-item
-                a.nav-link(href='#') 2D Animation
+                a.nav-link(href='/animation') 2D Animation
               li.nav-item
-                a.nav-link(href='#') Illustration
+                a.nav-link(href='/illustration') Illustration
             ul.navbar-nav.ml-auto
               if user
                 li.nav-item
@@ -36,11 +36,11 @@ html
                   a.nav-link(href="/users/register") Register
                 li.nav-item 
                   a.nav-link(href="/users/login") Login 
-    //- .container
-    //-   != messages('message', locals)
-    //-   if errors
-    //-     each error, i in errors
-    //-       div(class="alert alert-danger") #{error.msg}
+    .container
+      != messages('message', locals)
+      if errors
+        each error, i in errors
+          div(class="alert alert-danger") #{error.msg}
     block content
     br
     hr
