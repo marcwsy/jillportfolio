@@ -1,9 +1,11 @@
 extends layout
 
 block content
-    h1 2D animation
+    h1 2D Animation
     if user
-        a(href='./animation/upload') Upload
+        .upload-container
+            a(href='./animation/upload')
+                button.btn.btn-outline-primary(type='button') Upload
         each val in files  
             ul
                 li

@@ -1,12 +1,11 @@
 extends layout
 
 block content
-    h1 Upload
-
-        h1.text-center.display-4.my-4 Illustration
-        form(action='/illustration' method='POST' enctype='multipart/form-data')
-            .custom-file.mb-3
-                input#file.custom-file-input(type='file' name='file')
-                label.custom-file-label(for='file') Choose File
-            input.btn.btn-primary.btn-block(type='submit' value='Submit')
-        hr
+        h1.text-center.display-4.my-4 Upload
+        .container-forms 
+            .container-file
+                form(action='/illustration' method='POST' enctype='multipart/form-data')
+                    .mb-3
+                        input#formFile.form-control(type='file' name='file')
+                        label.form-label(for='file')
+                    input.btn.btn-outline-primary(type='submit' value='Submit')

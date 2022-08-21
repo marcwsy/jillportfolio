@@ -3,7 +3,9 @@ extends layout
 block content
     h1 3D Modeling
     if user
-        a(href='./modeling/upload') Upload
+        .upload-container
+            a(href='./modeling/upload')
+                button.btn.btn-outline-primary(type='button') Upload
         each val in files  
             ul
                 li

@@ -3,7 +3,9 @@ extends layout
 block content
     h1 Illustration
     if user
-        a(href='./illustration/upload') Upload
+        .upload-container
+            a(href='./illustration/upload')
+                button.btn.btn-outline-primary(type='button') Upload
         each val in files  
             ul
                 li
