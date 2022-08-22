@@ -26,7 +26,6 @@ router.post('/register', async (req, res) => {
   req.checkBody('password', 'Password is required').notEmpty();
   req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
 
-  // let errors = req.validationErrors();
   let errors = req.validationResult();
 
   if (errors) {

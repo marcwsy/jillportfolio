@@ -2,6 +2,7 @@ const { getGfsI, getBucketI, connectDb } = require("../config/db");
 const upload = require('../middleware/illustrationMiddleware');
 const mongoose = require('mongoose');
 
+// generate form view
 exports.get_form = (req, res) => {
     getGfsI().files.find().toArray((err, files) => {
         // Check if files
@@ -23,6 +24,7 @@ exports.get_form = (req, res) => {
     });
 };
 
+// generate page where image is displayed
 exports.get_page = (req, res) => {
     getGfsI().files.find().toArray((err, files) => {
         // Check if files
@@ -44,11 +46,13 @@ exports.get_page = (req, res) => {
     });
 };
 
+// upload image and redirect back to original page
 exports.upload_single = (req, res) => {
         upload.single('file');
         res.redirect('/illustration');
 };
 
+// get files test
 exports.get_files = (req, res) => {
     getGfsI().files.find().toArray((err, files) => {
       // Check if files
@@ -63,6 +67,7 @@ exports.get_files = (req, res) => {
     });
 };
 
+// get specific image file test
 exports.get_files_id = ({ params: { id } }, res) => {
   
     const _id = new mongoose.Types.ObjectId(id);
@@ -75,6 +80,7 @@ exports.get_files_id = ({ params: { id } }, res) => {
     });
 };
 
+// display specific image on display page
 exports.get_image_id = ({ params: { id } }, res) => {
     if (!id || id === 'undefined') return res.status(400).send('no image id');
   

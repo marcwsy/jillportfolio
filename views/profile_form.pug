@@ -1,0 +1,15 @@
+extends layout
+
+block content
+        h1.text-center.display-4.my-4 Upload
+        .container-forms 
+            .container-file
+                form(action='/home/profile' method='POST' enctype='multipart/form-data')
+                    .mb-3
+                        input#formFile.form-control(type='file' name='file')
+                        label.form-label(for='file')
+                    input.btn.btn-outline-primary(type='submit' value='Submit')
+
+ 
+//-  THIS FILE IS NOT USED, IT WAS FOR PRACTICE 
+

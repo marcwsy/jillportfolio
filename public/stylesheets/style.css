@@ -9,13 +9,26 @@
     margin: 0;
 }
 
+html {
+  display: flex;
+  justify-content: center;
+}
 body {
   background-color: #C9D6E8;
   font-family: Poppins;
+  width: 1000px;
 }
 
 footer {
-  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 2px;
 }
 
 .alert-error{
@@ -51,6 +64,7 @@ h1 {
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin: 10px;
 }
 
 .container-file {
@@ -63,7 +77,6 @@ h1 {
 
 .container-forms {
   display: flex;
-  width: 100vw;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -75,6 +88,7 @@ a {
 
 nav {
   border-radius: 5px;
+
 }
 
 .container-header {
@@ -83,11 +97,23 @@ nav {
   align-items: center;
   text-align: center;
   flex-direction: column;
+  padding: 12px;
 }
 
 .container-about {
   display: flex;
   flex-direction: column;
-  margin: 60px 0px 10px 300px;
-  padding: 24px;
+  width: 100vw;
+  padding: 12px;
+  margin-top: 10px;
+}
+
+.container-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

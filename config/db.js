@@ -1,19 +1,21 @@
 const mongoose = require("mongoose");
 const Grid = require('gridfs-stream');
 
-// Init gfs
+// Init gfs for each collection
 let uploadConn;
 let gfsM, gridfsbucketM;
 let gfsA, gridfsbucketA;
 let gfsI, gridfsbucketI;
+let gfsP, gridfsbucketP;
 
 const uri = 'mongodb+srv://marcsy:6162@cluster0.cghwluy.mongodb.net/?retryWrites=true&w=majority';
 const connectDb = () => {
     try {
-        // Create connection
+        // Create connection for each buckets
         mongoose.connect(uri, { useNewUrlParser: true , useUnifiedTopology: true});
         const conn = mongoose.connection;
         conn.on('open', () => {
+            // stream
             gridfsbucketM = new mongoose.mongo.GridFSBucket(conn.db, {
                 bucketName: 'modeling'
             });
@@ -31,6 +33,12 @@ const connectDb = () => {
             });
             gfsI = Grid(conn.db, mongoose.mongo);
             gfsI.collection('illustration');
+
+            gridfsbucketP = new mongoose.mongo.GridFSBucket(conn.db, {
+                bucketName: 'profile'
+            });
+            gfsP = Grid(conn.db, mongoose.mongo);
+            gfsP.collection('profile');
         });
             console.log("MongoDB GridFS Connected");
 
@@ -46,7 +54,8 @@ const getGfsA = () => gfsA;
 const getBucketA = () => gridfsbucketA;
 const getGfsI = () => gfsI;
 const getBucketI = () => gridfsbucketI;
-
+const getGfsP = () => gfsP;
+const getBucketP = () => gridfsbucketP;
 
 const infoDb = () => {
     mongoose.connect(uri, { useNewUrlParser: true , useUnifiedTopology: true});
@@ -62,9 +71,11 @@ module.exports = {
     getGfsM,
     getGfsA,
     getGfsI,
+    getGfsP,
     getBucketM,
     getBucketA,
     getBucketI,
+    getBucketP,
     infoDb, 
     mongooseConn 
 };

@@ -6,7 +6,7 @@ const About = require('mongoose').model('About');
 
 infoDb();
 
-// Display detail page
+// Display all of information from About 
 exports.index = function(req, res, next) {
     About.findOne({}, 'first_name last_name skills about_me phone_number email')
     .exec(function (err, results) {
@@ -23,6 +23,7 @@ exports.index = function(req, res, next) {
     });
 };
 
+// About information update form
 exports.about_update_get = function(req, res, next) {
     About.findOne({}, 'first_name last_name skills about_me phone_number email')
     .exec(function (err, results) {
@@ -39,6 +40,7 @@ exports.about_update_get = function(req, res, next) {
     });
 };
 
+// About information handle update post
 exports.about_update_post = async (req, res, next) => {
     let about = {};
         about.first_name = req.body.first_name;

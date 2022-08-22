@@ -9,13 +9,15 @@ const expressValidator = require('express-validator');
 const session = require('express-session');
 const passport = require('passport');
 const methodOverride = require('method-override');
+const favicon = require('serve-favicon');
+
 
 const { connectDb } = require('./config/db');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const homeRouter = require('./routes/home');
-const uploadRouter = require('./routes/upload');
+// const uploadRouter = require('./routes/upload');
 const modelingRouter = require('./routes/modeling');
 const animationRouter = require('./routes/animation');
 const illustrationRouter = require('./routes/illustration');
@@ -30,6 +32,8 @@ app.set('view engine', 'pug');
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+// tab icon
+app.use(favicon(path.join(__dirname,'public','images','favicon.ico')));
 app.use(methodOverride('_method'));
 app.use(logger('dev'));
 
@@ -38,10 +42,10 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+// download jills resume
 app.get('/download', function(req, res){
   const file = `${__dirname}/upload-folder/Resume.pdf`;
-  res.download(file); // Set disposition and send it.
+  res.download(file);
 });
 
 // Express session middleware
@@ -88,7 +92,7 @@ app.get('*', function (req, res, next) {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/home', homeRouter);
-app.use('/file', uploadRouter);
+// app.use('/file', uploadRouter);
 app.use('/modeling', modelingRouter);
 app.use('/animation', animationRouter);
 app.use('/illustration', illustrationRouter);
