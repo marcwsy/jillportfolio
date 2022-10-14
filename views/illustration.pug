@@ -1,17 +1,20 @@
 extends layout
 
 block content
-    h1 Illustration
+    h1.flex.justify-center.align-center.py-2.margin-top-header Illustration
     if user
-        .upload-container
+        .flex.justify-center.align-center.py-2
             a(href='./illustration/upload')
-                button.btn.btn-outline-primary(type='button') Upload
+                button.btn.btn-primary.btn-shadow.margin-top-xsm(type='button') Upload
         each val in files  
             ul
-                li
+                li.flex.justify-center.align-center.py-2
                     img(src=`/illustration/image/${val._id}`)
+            form.flex.justify-center.align-center.py-2(action=`/illustration/files/${val._id}?_method=DELETE` method='POST')
+                button.btn.btn-outline-danger.btn-sm(type='submit')
+                    i.ph-trash.ph-lg
     else
         each val in files  
             ul
-                li
+                li.flex.justify-center.align-center.py-2
                     img(src=`/illustration/image/${val._id}`)

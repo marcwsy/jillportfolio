@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const { User } = require('../models/user');
-const { body, validationResult } = require('express-validator');
+const { check, body, validationResult } = require('express-validator');
 
 // Register Form
 router.get('/register', async (req, res) => {
@@ -19,16 +19,23 @@ router.post('/register', async (req, res) => {
   const password = req.body.password;
   const password2 = req.body.password2;
 
-  req.checkBody('name', 'Name is required').notEmpty();
-  req.checkBody('email', 'Email is required').notEmpty();
-  req.checkBody('email', 'Email is not valid').isEmail();
-  req.checkBody('username', 'Username is required').notEmpty();
-  req.checkBody('password', 'Password is required').notEmpty();
-  req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
+  // body('name', 'Name is required').notEmpty();
+  // body('email', 'Email is required').notEmpty();
+  // body('email', 'Email is not valid').isEmail();
+  // body('username', 'Username is required').notEmpty();
+  // body('password', 'Password is required').notEmpty();
+  // body('password2', 'Passwords do not match').equals(req.body.password);
 
-  let errors = req.validationResult();
+  body('name').notEmpty().withMessage('Name is required');
+  body('email').notEmpty().withMessage('Email is required');
+  body('email').isEmail().withMessage('Email is not valid');
+  body('username').notEmpty().withMessage('Username is required');
+  body('password').notEmpty().withMessage('Password is required');
+  body('password2').equals(req.body.password).withMessage('Passwords do not match');
 
-  if (errors) {
+  let errors = validationResult(req);
+
+  if (errors.isEmpty()) {
     res.render('register', {
       errors: errors
     });
@@ -45,7 +52,6 @@ router.post('/register', async (req, res) => {
     res.redirect('/users/login');
   }
 });
-
 
 // Login Form
 router.get('/login', (req, res) => {

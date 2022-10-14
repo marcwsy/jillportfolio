@@ -96,3 +96,17 @@ exports.get_image_id = ({ params: { id } }, res) => {
       getBucketM().openDownloadStream(_id).pipe(res);
     });
 };
+
+exports.delete_image = ({ params: { id } }, res) => {
+
+    const _id = new mongoose.Types.ObjectId(id);
+
+  getGfsM().files.deleteOne({_id}, (err, gridStore) => {
+      if (err) {
+        return res.status(404).json({
+          err: 'No files exist'
+        });
+      }
+      res.redirect('/modeling');
+  });
+};

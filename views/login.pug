@@ -1,13 +1,15 @@
 extends layout
 
 block content 
-    h1 Login
-    .container-login
-        form(method='POST', action='/users/login')
-            label Username: 
-            input.form-control(name='username', type='text')
-            #form-group 
-            label Password: 
-            input.form-control(name='password', type='password')
-            .upload-container
-                input.btn.btn-outline-primary(type='submit', value='Submit')
+    h1.text-center.margin-top-header Login
+    .container.flex.flex-column.justify-center.w-50.bg-dark.text-dark.py-2.px-2.align-center
+        .page.bg-page.text-dark.py-5.px-5.border-radius
+            form(method='POST', action='/users/login')
+                .mb-3
+                    label Username: 
+                    input.form-control(name='username', type='text')
+                    #form-group 
+                    label Password: 
+                    input.form-control(name='password', type='password')
+                    .flex.justify-center
+                        input.btn.btn-primary.btn-shadow.margin-top-xsm(type='submit', value='Submit')

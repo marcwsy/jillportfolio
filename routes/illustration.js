@@ -21,6 +21,9 @@ router.get('/files/:id', illustration_controller.get_files_id);
 // showcase image on page
 router.get('/image/:id', illustration_controller.get_image_id);
 
+// delete image
+router.delete('/files/:id', ensureAuthenticated, illustration_controller.delete_image);
+
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next();

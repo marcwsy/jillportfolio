@@ -44,10 +44,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // download jills resume
 app.get('/download', function(req, res){
-  const file = `${__dirname}/upload-folder/Resume.pdf`;
+  const file = `${__dirname}/upload-folder/Jillian_Sy_Resume_2022.docx`;
   res.download(file);
 });
-
+  
 // Express session middleware
 app.use(session({
   secret: 'random stuff',
@@ -61,24 +61,6 @@ app.use(function (req, res, next) {
     res.locals.messages = require('express-messages')(req, res);
     next();
 });
-
-// // Express validator middleware
-// app.use(expressValidator({
-//   errorFormatter: function (param, msg, value) {
-//     const namespace = param.split('.')
-//       , root = namespace.shift()
-//       , formParam = root;
-
-//     while (namespace.length) {
-//       formParam += '[' + namespace.shift() + ']';
-//     }
-//     return {
-//       param: formParam,
-//       msg: msg,
-//       value: value
-//     };
-//   }
-// }));
 
 require('./config/passport')(passport);
 app.use(passport.initialize());

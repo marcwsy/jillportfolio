@@ -1,17 +1,20 @@
 extends layout
 
 block content
-    h1 2D Animation
+    h1.flex.justify-center.align-center.py-2.margin-top-header 2D Animation
     if user
-        .upload-container
+        .flex.justify-center.align-center.py-2
             a(href='./animation/upload')
-                button.btn.btn-outline-primary(type='button') Upload
-        each val in files  
+                button.btn.btn-primary.btn-shadow.margin-top-xsm(type='button') Upload
+        each val in files
             ul
-                li
+                li.flex.justify-center.align-center.py-2
                     img(src=`/animation/image/${val._id}`)
+            form.flex.justify-center.align-center.py-2(action=`/animation/files/${val._id}?_method=DELETE` method='POST')
+                button.btn.btn-outline-danger.btn-sm(type='submit')
+                    i.ph-trash.ph-lg
     else
-        each val in files  
+        each val in files
             ul
-                li
-                    img(src=`/animation/image/${val._id}`)
+                li.flex.justify-center.align-center.py-2
+                    img(src=`/animation/image/${val._id}`)         

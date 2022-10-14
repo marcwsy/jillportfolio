@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    h1.text-center.margin-top-header Inbox
+    .container.flex.flex-column.justify-center.w-50.bg-dark.text-dark.py-2.px-2
+        each val in results
+            .container.bg-white.margin-top-xsm.border-radius
+                h2.py-2.px-2
+                    strong #{val.subject} 
+                .flex.justify-between.px-2
+                    p.text-sm #{val.full_name}
+                    p #{val.email}
+                p.px-5.text-sm.bg-light-grey.border-radius #{val.message_inquiry}
+                .flex.justify-end
+                    p.margin-zero #{val.date_formatted}
+                    form.flex.align-center(action=`/home/message_inquiries/${val._id}?_method=DELETE` method='POST')
+                        button.btn.btn-outline-danger.btn-sm(type='submit')
+                            i.ph-trash.ph-lg

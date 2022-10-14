@@ -1,5 +1,5 @@
 const { getGfsA, getBucketA, connectDb } = require("../config/db");
-const upload = require('../middleware/modelingMiddleware');
+const upload = require('../middleware/animationMiddleware');
 const mongoose = require('mongoose');
 
 // generate form view
@@ -94,5 +94,19 @@ exports.get_image_id = ({ params: { id } }, res) => {
       }
 
       getBucketA().openDownloadStream(_id).pipe(res);
+    });
+};
+
+exports.delete_image = ({ params: { id } }, res) => {
+
+      const _id = new mongoose.Types.ObjectId(id);
+
+    getGfsA().files.deleteOne({_id}, (err, gridStore) => {
+        if (err) {
+          return res.status(404).json({
+            err: 'No files exist'
+          });
+        }
+        res.redirect('/animation');
     });
 };

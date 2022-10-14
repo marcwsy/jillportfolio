@@ -1,11 +1,13 @@
 extends layout
 
 block content
-        h1.text-center.display-4.my-4 Upload
-        .container-forms 
-            .container-file
-                form(action='/modeling' method='POST' enctype='multipart/form-data')
-                    .mb-3
-                        input#formFile.form-control(type='file' name='file')
-                        label.form-label(for='file')
-                    input.btn.btn-outline-primary(type='submit' value='Submit')
+        h1.flex.justify-center.align-center.py-2.margin-top-header Upload
+        .container.flex.justify-center.py-5.px-5
+            .page.bg-page.text-dark.py-5.px-5.border-radius
+                .container
+                    form(action='/modeling' method='POST' enctype='multipart/form-data')
+                        .mb-3
+                            input#formFile.form-control(type='file' name='file')
+                            label.form-label(for='file')
+                        .flex.justify-center
+                            input.btn.btn-primary.btn-shadow.margin-top-xsm(type='submit' value='Submit')

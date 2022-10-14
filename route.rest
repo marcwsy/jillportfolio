@@ -1,0 +1,26 @@
+GET http://localhost:3000/home
+
+###
+
+GET http://localhost:3000/home/message_inquiries
+
+###
+
+POST http://localhost:3000/home/message_inquiries
+Content-Type: application/json
+
+{
+    "full_name": "this person",
+    "email": "this email",
+    "subject": "this is the subject",
+    "message_inquiry": "hi"
+}
+
+###
+
+GET http://localhost:3000/home/files
+
+###
+
+GET http://localhost:3000/home/files/6345bfb83e836c4feacf482d
+

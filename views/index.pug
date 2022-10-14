@@ -1,16 +1,63 @@
 extends layout
 
 block content
-    .container-header
+    .container.flex.justify-center.flex-column.text-center.bg-dark.margin-bg
         h1 #{first_name} #{last_name}
-        p #{skills}
-    .container-about
-        h4 About Me
-        p #{about_me}
-        h4 Contact Info
-        p #{phone_number}
-        p #{email}
-        a(href="/download") Download Resume
-        div(style='margin-left:20px;margin-top:20px')
-
-            
+        p.text-sm #{skills}
+    .container.flex.justify-center.bg-dark
+        a(href='https://www.linkedin.com/in/jillian-sy-0114291a6/' target='_blank' rel='noopener noreferrer')
+            i.ph-linkedin-logo.ph-3x
+        a(href='https://www.instagram.com/jilliannsy/' target='_blank' rel='noopener noreferrer')
+            i.ph-instagram-logo.ph-3x
+    #skill-experience.bg-skills-cover.py-10.margin-top-xsm
+        .container.flex.justify-center.margin-xsm
+            h1 Skills & Experience
+        .row.flex.justify-center.gap
+            .col-sm-auto.text-center
+                img.skill-adobe(src='/images/adobe.png' alt='adobe') 
+                h3 Adobe Creative
+                .flex.justify-center
+                    p.text-sm.max-w #{adobe}
+            .col-sm-auto.text-center
+                img.skill(src='/images/maya.png' alt='maya') 
+                h3 Maya
+                .flex.justify-center
+                    p.text-sm.max-w #{maya}
+            .col-sm-auto.text-center
+                img.skill(src='/images/unreal.png' alt='unreal engine') 
+                h3 Unreal Engine
+                .flex.justify-center
+                    p.text-sm.max-w #{unreal}
+            .col-sm-auto.text-center
+                img.skill(src='/images/zbrush.png' alt='zbrush') 
+                h3 Zbrush
+                .flex.justify-center
+                    p.text-sm.max-w #{zbrush}
+    #about-me.container.flex.justify-center.py-10
+        .page.bg-page.text-dark.py-5.px-5.border-radius
+            .container
+                h4.text-center About Me
+                p.text-sm #{about_me}
+            .container.flex.justify-center.gap
+                a(href="/download")
+                    button.btn.btn-primary.btn-shadow.margin-top-xsm(type='button') Download Resume
+                a(href='/resume/Jillian_Sy_Resume_2022.pdf' target='_blank' rel='noopener noreferrer')
+                    button.btn.btn-primary.btn-shadow.margin-top-xsm(type='button') Open Resume
+    .bg-about-cover 
+        #contact.container.flex.justify-center.margin-sm.py-5.px-5
+            .page.bg-page.text-dark.py-5.px-5.border-radius
+                .container
+                    h4.text-center Contact Me
+                    p.text-sm Centreville, VA
+                    p.text-sm (571) 490-7504
+                    p.text-sm #{email}
+                    form(action='/home/message_inquiries' method='POST' enctype="application/json")
+                        label(for='full_name') Name
+                        input.form-control(type='text' name='full_name' placeholder='name')
+                        label(for='email') Email
+                        input.form-control(type='text' name='email' placeholder='email')
+                        label(for='subject') Subject
+                        input.form-control(type='text' name='subject' placeholder='subject')                        
+                        label(for='message_inquiry') Message  
+                        textarea.form-control(type='text' name='message_inquiry' placeholder='type a message' rows='5')
+                        input.btn.btn-primary.btn-shadow.margin-top-xsm(type='submit' value='Send')
