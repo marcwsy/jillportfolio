@@ -403,7 +403,7 @@ footer {
   }
 } */
 
-@media only screen and (min-width : 380px) and (max-width : 400px) {
+@media only screen and (min-width : 380px) and (max-width : 440px) {
   .margin-top-header {
     margin-top: 20%;
   }
