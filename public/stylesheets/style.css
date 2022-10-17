@@ -222,11 +222,15 @@ footer {
   justify-content: flex-end;
 }
 
-.text-uppercase{
+.text-uppercase {
   text-transform: uppercase;
 }
 
-.container{
+.container {
+  width: 100%;
+}
+
+.container-inbox {
   width: 100%;
 }
 
@@ -399,13 +403,15 @@ footer {
   }
 } */
 
-@media only screen and (min-width : 320px) and (max-width : 480px) {
+@media only screen and (min-width : 380px) and (max-width : 400px) {
   .margin-top-header {
     margin-top: 20%;
   }
-  img {
-    max-width: max-content;
-    max-height: max-content;
+  .page {
+    min-width: 230px;
+  }
+  .container-inbox {
+    min-width: 385px;
   }
 }
 /*
