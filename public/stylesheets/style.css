@@ -33,41 +33,6 @@
 
 /* ------------------- Variables ------------------------ */
 
-/* ------------------- Media ------------------------ */
-
-/*
-@media (min-width: 640px) {
-  .container{
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container{
-      max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container{
-      max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container{
-      max-width: 1280px;
-  }
-}
-
-@media (min-width: 1920px) {
-  .container{
-      max-width: 1920px;
-  }
-}
-*/
-/* ------------------- Media ------------------------ */
-
 /* ------------------- Special ------------------------ */
 
 a {
@@ -424,3 +389,48 @@ footer {
 .ph-3x {
   font-size: 3em;
 }
+
+/* ------------------- Media ------------------------ */
+
+/* 
+@media (min-width: 500px) {
+  body {
+    background-color: var(--bg-grey);
+  }
+} */
+
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+  .margin-top-header {
+    margin-top: 20%;
+  }
+  img {
+    max-width: max-content;
+    max-height: max-content;
+  }
+}
+/*
+@media (min-width: 768px) {
+  .container{
+      max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container{
+      max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container{
+      max-width: 1280px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container{
+      max-width: 1920px;
+  }
+}
+*/
+/* ------------------- Media ------------------------ */

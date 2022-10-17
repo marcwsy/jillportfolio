@@ -13,12 +13,14 @@ html
   body.bg-dark
     nav.navbar.navbar-expand-lg.navbar-light.bg-dark
       .container-fluid
-        button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
+        button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarTogglerDemo02' aria-controls='navbarTogglerDemo02' aria-expanded='false' aria-label='Toggle navigation')
           span.navbar-toggler-icon
-        #navbarTogglerDemo03.collapse.navbar-collapse
-          ul.navbar-nav.me-auto.mb-2.mb-lg-0
-            li.nav-item
-              a#home.nav-link(aria-current='page' href='/home#home') Home
+        #navbarTogglerDemo02.collapse.navbar-collapse
+          ul.navbar-nav.mr-auto.mt-2.mt-lg-0
+            li.nav-item.active
+              a.nav-link(href='/home#home')
+                | Home 
+                span.sr-only (current)
             li.nav-item
               a.nav-link(href='/modeling') 3D Modeling
             li.nav-item
@@ -31,7 +33,6 @@ html
               a.nav-link(href='/home#about-me') About Me
             li.nav-item
               a.nav-link(href='/home#contact') Contact
-          ul.navbar-nav.ml-auto
             if user
               li.nav-item 
                 a.nav-link(href="/home/message_inquiries") Messages
@@ -42,6 +43,36 @@ html
             else
               li.nav-item 
                 a.nav-link(href="/users/login") Login
+    //- nav.navbar.navbar-expand-lg.navbar-light.bg-dark
+    //-   button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
+    //-     span.navbar-toggler-icon
+    //-   #navbarTogglerDemo02.collapse.navbar-collapse
+    //-     ul.navbar-nav.me-auto.mb-2.mb-lg-0
+    //-       li.nav-item
+    //-         a#home.nav-link(aria-current='page' href='/home#home') Home
+    //-       li.nav-item
+    //-         a.nav-link(href='/modeling') 3D Modeling
+    //-       li.nav-item
+    //-         a.nav-link(href='/animation') 2D Animation
+    //-       li.nav-item
+    //-         a.nav-link(href='/illustration') Illustration
+    //-       li.nav-item
+    //-         a.nav-link(href='/home#skill-experience') Skills
+    //-       li.nav-item
+    //-         a.nav-link(href='/home#about-me') About Me
+    //-       li.nav-item
+    //-         a.nav-link(href='/home#contact') Contact
+    //-     ul.navbar-nav.ml-auto
+    //-       if user
+    //-         li.nav-item 
+    //-           a.nav-link(href="/home/message_inquiries") Messages
+    //-         li.nav-item
+    //-           a.nav-link(href="/home/update") Edit
+    //-         li.nav-item
+    //-           a.nav-link(href='/users/logout') Logout
+    //-       else
+    //-         li.nav-item 
+    //-           a.nav-link(href="/users/login") Login
     main#site-main
       .container
         != messages('message', locals)
